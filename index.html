@@ -3,283 +3,1479 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Big Lugg (Clay Dietz) — Houston hip-hop. Fire Style! and the catalog. Private preview mock." />
+  <meta name="description" content="Big Lugg (Clay Dietz) — Houston rapper. Fire Style! and the catalog. Private preview." />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Big Lugg — Preview Mock</title>
+  <meta property="og:title" content="Big Lugg — Preview" />
+  <meta property="og:description" content="Houston rapper. Made a Naruto album with the English dub cast, for charity." />
+  <meta property="og:image" content="assets/covers/fire-style.jpg" />
+  <meta property="og:type" content="website" />
+  <title>Big Lugg — Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --paper: #F2EBDD;
+  --paper-2: #E6DDCA;
+  --ink: #111111;
+  --ink-soft: #3A3A3A;
+  --tone: #111111;
+  --candy: #D9361E;
+  --candy-deep: #8E1F10;
+  --chrome: #B8BCC2;
+  --night: #0D0D10;
+  --night-ink: #F2EBDD;
+  --nav-h: 44px;
+  --font-display: "Dela Gothic One", system-ui, sans-serif;
+  --font-body: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --font-ui: "DotGothic16", monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+button, input { font: inherit; }
+:focus-visible {
+  outline: 3px solid var(--candy);
+  outline-offset: 2px;
+}
+
+/* Utilities */
+.tone {
+  background-image: radial-gradient(var(--tone) 1px, transparent 1.2px);
+  background-size: 6px 6px;
+}
+.speedlines {
+  background:
+    repeating-conic-gradient(from 0deg at 70% 80%,
+      transparent 0deg 2deg,
+      rgba(17,17,17,0.07) 2deg 3deg);
+}
+.panel {
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  padding: 20px 24px;
+  position: relative;
+}
+@media (min-width: 769px) {
+  .panel--tilt-a { transform: rotate(-0.4deg); }
+  .panel--tilt-b { transform: rotate(0.3deg); }
+  .panel--tilt-c { transform: rotate(-0.25deg); }
+}
+.sfx {
+  font-family: var(--font-display);
+  color: var(--candy);
+  -webkit-text-stroke: 3px var(--ink);
+  paint-order: stroke fill;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  min-height: 48px;
+  padding: 0.65em 1.25em;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 80ms steps(2), box-shadow 80ms steps(2), background 80ms;
+  border-radius: 0;
+}
+.btn:hover { background: var(--paper-2); }
+.btn:active, .btn.is-pressed {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+.btn--candy {
+  background: var(--candy);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.btn--candy:hover { background: var(--candy-deep); color: var(--paper); }
+.btn:disabled, .btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Preview stamp */
+.preview-stamp {
+  position: fixed;
+  top: calc(var(--nav-h) + 10px);
+  right: 12px;
+  z-index: 90;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--candy);
+  border: 2px solid var(--candy);
+  padding: 4px 8px;
+  background: transparent;
+  transform: rotate(4deg);
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+/* Nav */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  gap: 12px;
+}
+.nav-mark {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--paper);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex;
+  gap: 1.1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a {
+  color: var(--paper);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+.nav-links a.is-active { border-bottom-color: var(--candy); color: var(--candy); }
+
+/* Sections common */
+.section {
+  padding: 48px 16px;
+  position: relative;
+}
+.section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 0.35em;
+  line-height: 1.1;
+}
+.section-sub {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+}
+
+/* Panel wipe entry */
+.wipe-in {
+  clip-path: inset(0 100% 0 0);
+}
+.wipe-in.is-shown {
+  animation: panelWipe 350ms steps(6) forwards;
+}
+@keyframes panelWipe {
+  to { clip-path: inset(0 0 0 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wipe-in { clip-path: none; }
+  .wipe-in.is-shown { animation: none; }
+}
+
+/* ========== HERO ========== */
+.hero {
+  min-height: calc(100vh - var(--nav-h));
+  padding: 24px 16px 0;
+  display: flex;
+  align-items: stretch;
+}
+.hero__panel {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  border: 4px solid var(--ink);
+  background: var(--paper);
+  position: relative;
+  overflow: visible;
+  min-height: calc(100vh - var(--nav-h) - 48px);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  padding: 28px 20px 0;
+}
+.hero__panel.is-drawn {
+  animation: borderDraw 400ms steps(4) both;
+}
+@keyframes borderDraw {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.hero__speed {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.hero__jp {
+  position: absolute;
+  left: 10px;
+  top: 100px;
+  writing-mode: vertical-rl;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.15em;
+  z-index: 2;
+}
+.hero__sfx {
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  font-size: clamp(4rem, 22vw, 10rem);
+  transform: rotate(-10deg);
+  z-index: 1;
+  opacity: 0;
+}
+.hero__sfx.is-stamped {
+  animation: sfxStamp 280ms steps(3) forwards;
+}
+@keyframes sfxStamp {
+  0% { opacity: 0; transform: rotate(-10deg) scale(1.4); }
+  70% { opacity: 1; transform: rotate(-10deg) scale(0.92); }
+  100% { opacity: 1; transform: rotate(-10deg) scale(1); }
+}
+.hero__title {
+  position: relative;
+  z-index: 3;
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 18vw, 11rem);
+  line-height: 0.85;
+  margin: 0;
+  color: var(--ink);
+  max-width: 12ch;
+}
+.hero__copy {
+  position: relative;
+  z-index: 3;
+  max-width: 34ch;
+  margin: 1.25rem 0 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.hero__ctas {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+.hero__portrait-wrap {
+  position: relative;
+  z-index: 4;
+  justify-self: end;
+  align-self: end;
+  width: min(72vw, 380px);
+  margin-right: -20px;
+  margin-bottom: -4px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero__portrait-wrap.is-in {
+  animation: portraitIn 400ms steps(5) forwards;
+}
+@keyframes portraitIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero__portrait {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 88% 20%;
+  border: 3px solid var(--ink);
+  background: var(--paper-2);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+@media (min-width: 768px) {
+  .hero__panel {
+    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-rows: auto 1fr;
+    padding: 36px 32px 0 36px;
+  }
+  .hero__title { grid-column: 1; }
+  .hero__copy, .hero__ctas { grid-column: 1; }
+  .hero__portrait-wrap {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    width: min(42vw, 460px);
+    margin-right: -40px;
+    margin-bottom: -20px;
+    align-self: end;
+    justify-self: end;
+  }
+  .hero__portrait {
+    aspect-ratio: 3 / 4.2;
+    object-position: 92% 15%;
+  }
+}
+
+/* ========== FIRE STYLE ========== */
+.fire {
+  padding-top: 64px;
+}
+.fire__grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .fire__grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-rows: auto auto;
+    gap: 16px 18px;
+  }
+  .fire__a { grid-row: 1 / 3; }
+}
+.fire__cover {
+  width: 100%;
+  border: 3px solid var(--ink);
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+.fire__label {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin: 0 0 0.25rem;
+}
+.fire__name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  color: var(--candy);
+  margin: 0 0 0.4rem;
+  line-height: 1;
+  -webkit-text-stroke: 1.5px var(--ink);
+  paint-order: stroke fill;
+}
+.fire__meta {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.fire__copy { margin: 0 0 1.25rem; }
+
+/* ========== MISSION BOARD ========== */
+.missions { background: var(--paper-2); }
+.mission-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+}
+.mission {
+  border-bottom: 2px solid var(--ink);
+}
+.mission:last-child { border-bottom: none; }
+.mission__row {
+  display: grid;
+  grid-template-columns: 36px 28px 1fr auto;
+  gap: 8px 10px;
+  align-items: center;
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font-family: var(--font-body);
+}
+.mission__row:hover { background: var(--paper-2); }
+.mission.is-open .mission__row { background: var(--paper-2); }
+.mission__n {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.mission__rank {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+.mission__rank[data-rank="S"] { background: var(--candy); color: var(--paper); }
+.mission__rank[data-rank="A"] { background: var(--chrome); }
+.mission__title {
+  font-weight: 700;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+.mission__feat {
+  display: block;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+.mission__dur {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.mission__panel {
+  display: none;
+  padding: 0 14px 16px;
+}
+.mission.is-open .mission__panel { display: block; }
+.mission__embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+}
+.mission__embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+@media (min-width: 640px) {
+  .mission__row {
+    grid-template-columns: 40px 32px 1fr auto;
+  }
+}
+
+/* ========== SHELF ========== */
+.shelf-scroller {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 40px 8px 28px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  align-items: flex-end;
+  min-height: 400px;
+}
+.spine-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  height: 320px;
+  width: 56px;
+  transition: width 180ms steps(3);
+}
+.spine-wrap.is-open {
+  width: 220px;
+}
+.spine {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 320px;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 4px;
+  transition: transform 160ms steps(3);
+  z-index: 2;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.spine-wrap.is-open .spine,
+.spine-wrap:hover .spine {
+  transform: translateY(-24px);
+}
+.spine__vol {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  writing-mode: vertical-rl;
+  margin-bottom: 8px;
+}
+.spine__band {
+  width: 100%;
+  height: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--ink);
+  flex-shrink: 0;
+}
+.spine__title {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  flex: 1;
+  overflow: hidden;
+  line-height: 1.1;
+}
+.spine__year {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  margin-top: 8px;
+}
+.pullout {
+  position: absolute;
+  left: 64px;
+  bottom: 24px;
+  width: 148px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition: opacity 160ms steps(3), transform 160ms steps(3);
+  z-index: 1;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  padding: 8px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.spine-wrap.is-open .pullout {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+.pullout img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  margin-bottom: 8px;
+}
+.pullout__name {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  margin: 0 0 4px;
+}
+.pullout__meta {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+.pullout .btn { width: 100%; min-height: 36px; font-size: 0.75rem; padding: 0.4em; }
+
+/* ========== BLACK PAGE ========== */
+.black {
+  background: var(--night);
+  color: var(--night-ink);
+  padding: 64px 16px;
+}
+.black .section-label { color: var(--night-ink); }
+.black .section-sub { color: var(--chrome); }
+.black__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .black__grid { grid-template-columns: repeat(3, 1fr); }
+}
+.black__panel {
+  border: 3px solid var(--night-ink);
+  background: var(--night);
+  padding: 14px;
+}
+.black__panel img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid var(--night-ink);
+  margin-bottom: 10px;
+}
+.black__panel h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin: 0 0 0.35rem;
+  line-height: 1.2;
+}
+.black__panel a {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--candy);
+}
+.black__words {
+  margin: 2rem 0;
+  font-size: 1.05rem;
+  max-width: 40ch;
+  border-left: 3px solid var(--candy);
+  padding-left: 1rem;
+  color: var(--chrome);
+  font-style: italic;
+}
+.black__embed {
+  border: 3px solid var(--night-ink);
+  overflow: hidden;
+  max-width: 720px;
+}
+.black__embed iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+/* ========== MERCH ========== */
+.merch { position: relative; }
+.merch__sfx {
+  position: absolute;
+  top: 20px;
+  right: 8%;
+  font-size: clamp(3rem, 12vw, 6rem);
+  transform: rotate(-12deg);
+  z-index: 2;
+}
+.merch__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+@media (min-width: 900px) {
+  .merch__grid { grid-template-columns: repeat(4, 1fr); }
+}
+.merch-card {
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  padding: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.merch-card.is-soon {
+  opacity: 0.6;
+}
+.merch-card__img {
+  aspect-ratio: 1;
+  border: 2px solid var(--ink);
+  background: var(--paper-2);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  overflow: hidden;
+}
+.merch-card__img img { width: 100%; height: 100%; object-fit: cover; }
+.merch-card__name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.2;
+}
+.merch-card__tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-right-color: var(--candy);
+  border-bottom-color: var(--candy);
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  padding: 2px 6px;
+}
+.merch-card__soon {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+}
+.merch__store {
+  margin-top: 1.25rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+/* ========== JOIN ========== */
+.join__panel { max-width: 520px; }
+.join__copy { margin: 0 0 1rem; font-weight: 500; }
+.join__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+}
+.join__form input[type="email"] {
+  flex: 1 1 200px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid var(--ink);
+  padding: 10px 4px;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--ink);
+  border-radius: 0;
+}
+.join__form input::placeholder { color: var(--ink-soft); }
+
+/* ========== CONNECT ========== */
+.connect-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.connect-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  padding: 14px 16px;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 80ms steps(2), box-shadow 80ms steps(2);
+}
+.connect-row:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+.connect-row__plat {
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+.connect-row__handle {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* ========== FOOTER ========== */
+.site-footer {
+  border-top: 3px solid var(--ink);
+  padding: 32px 16px 48px;
+  background: var(--paper-2);
+}
+.footer__inner { max-width: 1100px; margin: 0 auto; }
+.footer__crisis {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+}
+.footer__crisis a { color: var(--candy); }
+.footer__copy {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+}
+.footer__preview {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.25rem;
+}
+.seals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+.seals__hint {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  margin-right: 6px;
+}
+.seal-btn {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  padding: 6px 8px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  cursor: pointer;
+  border-radius: 0;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.seal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+/* ========== EASTER EGG ========== */
+.fireball {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--night);
+}
+.fireball.is-on { display: flex; }
+.fireball__wipe {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, #FFE566 0%, #FF8A00 35%, var(--candy) 70%, transparent 72%);
+  transform: scale(0);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.fireball.is-wiping .fireball__wipe {
+  animation: fireWipe 700ms ease-out forwards;
+}
+@keyframes fireWipe {
+  to { transform: scale(4); opacity: 0.15; }
+}
+.fireball__panel {
+  position: relative;
+  z-index: 2;
+  border: 4px solid var(--night-ink);
+  background: var(--night);
+  color: var(--night-ink);
+  padding: 28px 24px;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 6px 6px 0 var(--candy);
+}
+.fireball__panel h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin: 0 0 1rem;
+  line-height: 1.3;
+}
+.fireball__dismiss {
+  margin-top: 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--chrome);
+}
+  </style>
 </head>
 <body>
-  <div class="preview-badge" aria-label="Preview mock">Preview mock · not live</div>
-
-  <div class="noise" aria-hidden="true"></div>
-  <div class="ink-smoke" aria-hidden="true"></div>
+  <div class="preview-stamp" aria-hidden="true">Preview · not live</div>
 
   <header class="site-nav">
     <a class="nav-mark" href="#top">BIG LUGG</a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#fire-style">Fire Style!</a>
-      <a href="#music">Music</a>
-      <a href="#listen">Listen</a>
-      <a href="#connect">Connect</a>
+      <a href="#fire-style" data-nav="fire-style">Fire Style</a>
+      <a href="#music" data-nav="music">Music</a>
+      <a href="#merch" data-nav="merch">Merch</a>
+      <a href="#listen" data-nav="listen">Listen</a>
     </nav>
   </header>
 
   <main id="top">
     <!-- HERO -->
-    <section class="hero" data-chapter="hero">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="hero-orb hero-orb--leaf"></div>
-        <div class="hero-orb hero-orb--violet"></div>
-        <div class="hero-grid"></div>
-      </div>
-      <div class="hero-inner">
-        <p class="hero-kicker reveal">Houston · Rap · Anime</p>
-        <h1 class="hero-title">
-          <span class="reveal-line"><span class="reveal-inner">BIG</span></span>
-          <span class="reveal-line"><span class="reveal-inner">LUGG</span></span>
-        </h1>
-        <p class="hero-sub reveal">
-          Independent hip-hop from the Hidden Leaf after dark —
-          trauma made honest, village made loud.
-        </p>
-        <div class="hero-ctas reveal">
-          <a class="btn btn--primary magnetic" href="https://open.spotify.com/artist/2SZnSKMNNj62KqgT8NrS6E" target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
-          <a class="btn btn--fire magnetic" href="#fire-style">Fire Style!</a>
+    <section class="hero" aria-label="Big Lugg">
+      <div class="hero__panel" id="hero-panel">
+        <div class="hero__speed speedlines" aria-hidden="true"></div>
+        <span class="hero__jp" aria-hidden="true">ビッグ・ラグ</span>
+        <span class="sfx hero__sfx" id="hero-sfx" aria-hidden="true">ドン</span>
+        <h1 class="hero__title">BIG<br />LUGG</h1>
+        <p class="hero__copy">Houston rapper. Made a Naruto album with the English dub cast, for charity. Plenty more where that came from.</p>
+        <div class="hero__ctas">
+          <a class="btn btn--candy" href="https://fanlink.to/firestyle" target="_blank" rel="noopener noreferrer">Play Fire Style!</a>
+          <a class="btn" href="#music">All music</a>
         </div>
-        <div class="hero-covers" aria-hidden="true">
-          <img class="float-cover float-cover--1" src="assets/covers/fire-style.jpg" alt="" width="160" height="160" loading="eager" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/da/9c/c5/da9cc5c9-aecd-80a7-62a7-79bf236328d1/artwork.jpg/600x600bb.jpg'" />
-          <img class="float-cover float-cover--2" src="assets/covers/when-things-feel-grim.jpg" alt="" width="140" height="140" loading="eager" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/67/f6/0c/67f60c82-1b34-8955-926b-892ccb49387b/artwork.jpg/600x600bb.jpg'" />
-          <img class="float-cover float-cover--3" src="assets/covers/dude-wheres-my-slab.jpg" alt="" width="120" height="120" loading="eager" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/6c/1c/97/6c1c97d6-44ba-f0fb-cf7d-fdd3be6ecfbd/artwork.jpg/600x600bb.jpg'" />
+        <div class="hero__portrait-wrap" id="hero-portrait">
+          <img
+            class="hero__portrait"
+            src="assets/covers/fire-style.jpg"
+            alt="Big Lugg anime self-portrait from the Fire Style! cover"
+            width="600"
+            height="800"
+            fetchpriority="high"
+          />
         </div>
-      </div>
-      <div class="scroll-hint reveal" aria-hidden="true">
-        <span>Scroll the village</span>
-        <div class="scroll-line"></div>
       </div>
     </section>
 
     <!-- FIRE STYLE -->
-    <section id="fire-style" class="chapter chapter--fire" data-chapter="fire">
-      <div class="chapter-pin">
-        <div class="fire-layout">
-          <div class="fire-visual">
-            <div class="fire-frame">
-              <img
-                class="fire-cover"
-                src="assets/covers/fire-style.jpg"
-                alt="Fire Style! album cover"
-                width="600"
-                height="600"
-                loading="lazy"
-                onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/da/9c/c5/da9cc5c9-aecd-80a7-62a7-79bf236328d1/artwork.jpg/600x600bb.jpg'"
-              />
-              <div class="fire-glow" aria-hidden="true"></div>
-            </div>
-            <p class="fire-meta">Released Aug 19, 2022</p>
+    <section id="fire-style" class="section fire" data-watch="fire-style">
+      <div class="section__inner">
+        <div class="fire__grid">
+          <div class="panel panel--tilt-a fire__a wipe-in">
+            <img class="fire__cover" src="assets/covers/fire-style.jpg" alt="Fire Style! album cover" width="600" height="600" loading="lazy" />
           </div>
-          <div class="fire-copy">
-            <p class="eyebrow reveal">Signature project</p>
-            <h2 class="chapter-title reveal">
-              <span class="fire-word">Fire Style!</span>
-            </h2>
-            <p class="lede reveal">
-              A Naruto-themed charity hip-hop album featuring the English cast —
-              Yuri Lowenthal, Tara Platt, Ben Diskin, Tom Gibis, Henry Dittman,
-              Cissy Jones, Neil Kaplan, Brian Donovan, and more.
+          <div class="panel panel--tilt-b fire__b wipe-in">
+            <p class="fire__label" aria-hidden="true">火遁</p>
+            <h2 class="fire__name">Fire Style!</h2>
+            <p class="fire__meta">Aug 19, 2022 · 13 tracks · 30:47</p>
+          </div>
+          <div class="panel panel--tilt-c fire__c wipe-in">
+            <p class="fire__copy">
+              Big Lugg and Yuri Lowenthal, the voice of Sasuke, pulled together the English Naruto cast for a rap album. Proceeds go to the NAACP Legal Defense Fund and Asian Americans Advancing Justice.
+              <!-- CONFIRM: charity beneficiaries are still current -->
+              <!-- CONFIRM: whether to announce Fire Style 2 plainly -->
             </p>
-            <p class="body-copy reveal">
-              Streaming proceeds support the NAACP Legal Defense Fund and
-              Asian Americans Advancing Justice. Fire Style! 2 is reportedly in production.
-            </p>
-            <ul class="track-chips reveal" aria-label="Highlighted tracks">
-              <li>Uchiha Gang</li>
-              <li>Hard Work (feat. Brian Donovan)</li>
-              <li>Leave the Village</li>
-              <li>Dance! (feat. Neil Kaplan)</li>
-              <li>Maybe Next Time</li>
-              <li>What a Drag (feat. Tom Gibis)</li>
-            </ul>
-            <div class="fire-ctas reveal">
-              <a class="btn btn--fire magnetic" href="https://fanlink.to/firestyle" target="_blank" rel="noopener noreferrer">Fanlink · Fire Style!</a>
-              <a class="btn btn--ghost magnetic" href="https://open.spotify.com/artist/2SZnSKMNNj62KqgT8NrS6E" target="_blank" rel="noopener noreferrer">Stream</a>
-            </div>
+            <a class="btn btn--candy" href="https://fanlink.to/firestyle" target="_blank" rel="noopener noreferrer">Stream it</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MUSIC / ALBUMS -->
-    <section id="music" class="chapter chapter--music" data-chapter="music">
-      <div class="section-head">
-        <p class="eyebrow reveal">The catalog</p>
-        <h2 class="chapter-title reveal">Albums &amp; projects</h2>
-        <p class="lede reveal">Real covers. Real releases. Scroll the stack.</p>
+    <!-- MISSION BOARD -->
+    <section id="missions" class="section missions" data-watch="fire-style">
+      <div class="section__inner">
+        <h2 class="section-label"><span aria-hidden="true">任務</span> Mission Board</h2>
+        <p class="section-sub">with Yuri Lowenthal (Sasuke) · <!-- CONFIRM: ranks and feat→character pairings with Big Lugg; Cissy Jones character left null --></p>
+        <ol class="mission-list" id="mission-list"></ol>
       </div>
-
-      <div class="album-grid">
-        <article class="album-card reveal" data-speed="0.9">
-          <a class="album-link" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">
-            <img src="assets/covers/fire-style.jpg" alt="Fire Style!" width="600" height="600" loading="lazy" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/da/9c/c5/da9cc5c9-aecd-80a7-62a7-79bf236328d1/artwork.jpg/600x600bb.jpg'" />
-            <div class="album-info">
-              <h3>Fire Style!</h3>
-              <time datetime="2022-08-19">2022</time>
-            </div>
-          </a>
-        </article>
-
-        <article class="album-card reveal" data-speed="1.1">
-          <a class="album-link" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">
-            <img src="assets/covers/when-things-feel-grim.jpg" alt="When Things Feel Grim" width="600" height="600" loading="lazy" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/67/f6/0c/67f60c82-1b34-8955-926b-892ccb49387b/artwork.jpg/600x600bb.jpg'" />
-            <div class="album-info">
-              <h3>When Things Feel Grim</h3>
-              <time datetime="2025-08-29">2025</time>
-            </div>
-          </a>
-        </article>
-
-        <article class="album-card reveal" data-speed="0.85">
-          <a class="album-link" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">
-            <img src="assets/covers/dude-wheres-my-slab.jpg" alt="Dude, Where's My Slab?" width="600" height="600" loading="lazy" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/6c/1c/97/6c1c97d6-44ba-f0fb-cf7d-fdd3be6ecfbd/artwork.jpg/600x600bb.jpg'" />
-            <div class="album-info">
-              <h3>Dude, Where's My Slab?</h3>
-              <time datetime="2025-06-27">2025</time>
-            </div>
-          </a>
-        </article>
-
-        <article class="album-card reveal album-card--sensitive" data-speed="1.05">
-          <a class="album-link" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">
-            <img src="assets/covers/a-reason-not-2-kms.jpg" alt="A Reason Not 2 KMS" width="600" height="600" loading="lazy" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/e5/d8/1d/e5d81daa-f11f-f95d-1d4e-5392c094ce55/artwork.jpg/600x600bb.jpg'" />
-            <div class="album-info">
-              <h3>A Reason Not 2 KMS</h3>
-              <time datetime="2023-05-12">2023</time>
-            </div>
-          </a>
-        </article>
-
-        <article class="album-card reveal" data-speed="0.95">
-          <a class="album-link" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">
-            <img src="assets/covers/like-it-never-happened.jpg" alt="Like It Never Happened" width="600" height="600" loading="lazy" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5b/ad/04/5bad04a5-dc52-cb79-9004-6605a68c0ced/artwork.jpg/600x600bb.jpg'" />
-            <div class="album-info">
-              <h3>Like It Never Happened</h3>
-              <time datetime="2021-10-29">2021</time>
-            </div>
-          </a>
-        </article>
-
-        <article class="album-card reveal" data-speed="1.15">
-          <a class="album-link" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">
-            <img src="assets/covers/sasuke-ep.jpg" alt="Sasuke EP" width="600" height="600" loading="lazy" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/5a/7e/65/5a7e6580-f659-7d87-0ee6-4f2947f75018/artwork.jpg/600x600bb.jpg'" />
-            <div class="album-info">
-              <h3>Sasuke — EP</h3>
-              <time datetime="2022-12-30">2022</time>
-            </div>
-          </a>
-        </article>
-
-        <article class="album-card reveal album-card--sensitive" data-speed="1.0">
-          <a class="album-link" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">
-            <img src="assets/covers/antitoxin.jpg" alt="Antitoxin feat. CloudStyle" width="600" height="600" loading="lazy" onerror="this.src='https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5f/37/94/5f37949e-82f9-1ffe-67cf-dab2a7c80539/artwork.jpg/600x600bb.jpg'" />
-            <div class="album-info">
-              <h3>Antitoxin <span class="feat">(feat. CloudStyle)</span></h3>
-              <time datetime="2024">2024</time>
-            </div>
-          </a>
-        </article>
-      </div>
-
-      <p class="crisis-note reveal">
-        If you need help: <strong>988</strong> (US)
-      </p>
     </section>
 
-    <!-- BIO -->
-    <section class="chapter chapter--bio" data-chapter="bio">
-      <div class="bio-panel">
-        <p class="eyebrow reveal">About</p>
-        <h2 class="chapter-title reveal">Clay Dietz · Big Lugg</h2>
-        <p class="lede reveal">
-          Houston, TX. Music shaped by trauma and mental-health honesty —
-          written to reach people who struggle, not to polish the pain away.
+    <!-- THE SHELF -->
+    <section id="music" class="section shelf" data-watch="music">
+      <div class="section__inner">
+        <h2 class="section-label">The Shelf</h2>
+        <p class="section-sub">巻 · newest → oldest · tap a spine</p>
+        <div class="shelf-scroller" id="shelf" role="list"></div>
+      </div>
+    </section>
+
+    <!-- BLACK PAGE -->
+    <section id="listen" class="black" data-watch="listen">
+      <div class="section__inner">
+        <h2 class="section-label">Black Page</h2>
+        <p class="section-sub">The heavier records</p>
+        <div class="black__grid" id="black-grid"></div>
+        <p class="black__words">
+          Words from Big Lugg go here.
+          <!-- CONFIRM: Big Lugg writes 2–3 sentences here in his own words -->
         </p>
-        <p class="body-copy reveal">
-          Best known for Fire Style!, the charity collaboration with the
-          Naruto English cast. Beyond the leaf: slabs, grit, and nights that
-          don’t look away.
+        <div class="black__embed">
+          <iframe
+            src="https://open.spotify.com/embed/artist/2SZnSKMNNj62KqgT8NrS6E?utm_source=generator&theme=0"
+            width="100%"
+            height="352"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Big Lugg on Spotify"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- MERCH -->
+    <section id="merch" class="section merch" data-watch="merch">
+      <span class="sfx merch__sfx" aria-hidden="true">ザッ</span>
+      <div class="section__inner">
+        <h2 class="section-label">Merch</h2>
+        <p class="section-sub"><!-- CONFIRM: real products, prices, and images --></p>
+        <div class="merch__grid" id="merch-grid"></div>
+        <p class="merch__store">
+          <a href="https://my-store-cfad3e.creator-spring.com/" target="_blank" rel="noopener noreferrer">Full store →</a>
         </p>
       </div>
     </section>
 
-    <!-- LISTEN -->
-    <section id="listen" class="chapter chapter--listen" data-chapter="listen">
-      <div class="section-head">
-        <p class="eyebrow reveal">Press play</p>
-        <h2 class="chapter-title reveal">Listen</h2>
-      </div>
-      <div class="embed-wrap reveal">
-        <iframe
-          style="border-radius:12px"
-          src="https://open.spotify.com/embed/artist/2SZnSKMNNj62KqgT8NrS6E?utm_source=generator&theme=0"
-          width="100%"
-          height="352"
-          frameborder="0"
-          allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          title="Big Lugg on Spotify"
-        ></iframe>
-      </div>
-      <div class="listen-links reveal">
-        <a class="pill" href="https://open.spotify.com/artist/2SZnSKMNNj62KqgT8NrS6E" target="_blank" rel="noopener noreferrer">Spotify</a>
-        <a class="pill" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">Apple Music</a>
-        <a class="pill" href="https://fanlink.to/firestyle" target="_blank" rel="noopener noreferrer">Fire Style Fanlink</a>
+    <!-- JOIN -->
+    <section id="join" class="section join">
+      <div class="section__inner">
+        <div class="panel join__panel wipe-in">
+          <h2 class="section-label">Join</h2>
+          <p class="join__copy">Drops, shows, Fire Style news. Nothing else.</p>
+          <!-- CONFIRM: mailing list provider endpoint (Mailchimp/Kit/Laylo) -->
+          <form class="join__form" action="" method="post">
+            <label class="visually-hidden" for="email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" />
+            <button class="btn btn--candy" type="submit">Sign up</button>
+          </form>
+          <div id="shows-block" hidden></div>
+        </div>
       </div>
     </section>
 
     <!-- CONNECT -->
-    <section id="connect" class="chapter chapter--connect" data-chapter="connect">
-      <div class="section-head">
-        <p class="eyebrow reveal">Stay close</p>
-        <h2 class="chapter-title reveal">Connect</h2>
-      </div>
-      <div class="connect-grid reveal">
-        <a class="connect-card magnetic" href="https://x.com/bigluggmusic" target="_blank" rel="noopener noreferrer">
-          <span class="connect-label">X / Twitter</span>
-          <span class="connect-handle">@bigluggmusic</span>
-        </a>
-        <a class="connect-card magnetic" href="https://www.youtube.com/channel/UCVCzEK4aBoLPF_eABdz_djw" target="_blank" rel="noopener noreferrer">
-          <span class="connect-label">YouTube</span>
-          <span class="connect-handle">Official channel</span>
-        </a>
-        <a class="connect-card magnetic" href="https://open.spotify.com/artist/2SZnSKMNNj62KqgT8NrS6E" target="_blank" rel="noopener noreferrer">
-          <span class="connect-label">Spotify</span>
-          <span class="connect-handle">Follow Big Lugg</span>
-        </a>
-        <a class="connect-card magnetic" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer">
-          <span class="connect-label">Apple Music</span>
-          <span class="connect-handle">Artist page</span>
-        </a>
+    <section id="connect" class="section connect">
+      <div class="section__inner">
+        <h2 class="section-label">Connect</h2>
+        <ul class="connect-list">
+          <li><a class="connect-row" href="https://open.spotify.com/artist/2SZnSKMNNj62KqgT8NrS6E" target="_blank" rel="noopener noreferrer"><span class="connect-row__plat">Spotify</span><span class="connect-row__handle">Big Lugg</span></a></li>
+          <li><a class="connect-row" href="https://music.apple.com/us/artist/big-lugg/1438628261" target="_blank" rel="noopener noreferrer"><span class="connect-row__plat">Apple Music</span><span class="connect-row__handle">big-lugg</span></a></li>
+          <li><a class="connect-row" href="https://www.youtube.com/@biglugg" target="_blank" rel="noopener noreferrer"><span class="connect-row__plat">YouTube</span><span class="connect-row__handle">@biglugg</span></a></li>
+          <li><a class="connect-row" href="https://x.com/bigluggmusic" target="_blank" rel="noopener noreferrer"><span class="connect-row__plat">X</span><span class="connect-row__handle">@bigluggmusic</span></a></li>
+          <li><a class="connect-row" href="https://www.instagram.com/bigluggmusic/" target="_blank" rel="noopener noreferrer"><span class="connect-row__plat">Instagram</span><span class="connect-row__handle">@bigluggmusic</span></a></li>
+        </ul>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <p class="footer-mark">BIG LUGG</p>
-      <p class="footer-note">
-        Private concept preview · not an official live site ·
-        album art © respective labels / Apple Music artwork ·
-        no anime character art used
-      </p>
-      <p class="footer-crisis">If you need help: 988 (US)</p>
+    <div class="footer__inner">
+      <p class="footer__crisis">If you're going through it: call or text <strong>988</strong> (US). Outside the US: <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer">findahelpline.com</a></p>
+      <p class="footer__copy">© Big Lugg. Album art © Big Lugg.</p>
+      <p class="footer__preview">Private concept preview · not an official live site · no official Naruto / Kishimoto art used</p>
+      <div class="seals" id="seals">
+        <span class="seals__hint">Know your seals?</span>
+        <!-- seal buttons injected shuffled -->
+      </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="main.js"></script>
+  <div class="fireball" id="fireball" role="dialog" aria-modal="true" aria-labelledby="fireball-title" hidden>
+    <div class="fireball__wipe" aria-hidden="true"></div>
+    <div class="fireball__panel">
+      <h2 id="fireball-title">火遁・豪火球の術</h2>
+      <a class="btn btn--candy" href="https://www.youtube.com/watch?v=Z0h8PZgbO6I" target="_blank" rel="noopener noreferrer">Play Uchiha Gang</a>
+      <p class="fireball__dismiss">Click anywhere to dismiss</p>
+    </div>
+  </div>
+
+  <script>
+(function () {
+  "use strict";
+
+  /* ========== DATA (edit here) ========== */
+  const TRACKS = [
+    { n:1,  rank:"S", title:"Uchiha Gang",        feat:null,             char:null,        dur:"2:52", yt:"Z0h8PZgbO6I" },
+    { n:2,  rank:"A", title:"Hard Work",          feat:"Brian Donovan",  char:"Rock Lee",  dur:"2:05", yt:null },
+    { n:3,  rank:"B", title:"What A Drag",        feat:"Tom Gibis",      char:"Shikamaru", dur:"1:47", yt:null },
+    { n:4,  rank:"B", title:"Leave The Village",  feat:null,             char:null,        dur:"2:02", yt:null },
+    { n:5,  rank:"A", title:"Dude In A Crop Top", feat:"Ben Diskin",     char:"Sai",       dur:"2:13", yt:null },
+    { n:6,  rank:"C", title:"Fans",               feat:"Tara Platt",     char:"Temari",    dur:"2:29", yt:null },
+    { n:7,  rank:"C", title:"Dub Love",           feat:"Tara Platt",     char:"Temari",    dur:"2:38", yt:null },
+    { n:8,  rank:"C", title:"Prayer",             feat:null,             char:null,        dur:"2:09", yt:null },
+    { n:9,  rank:"B", title:"Otogakure",          feat:"Henry Dittman",  char:"Kabuto",    dur:"2:54", yt:null },
+    { n:10, rank:"B", title:"What's Mine",        feat:"Cissy Jones",    char:null,        dur:"2:35", yt:null },
+    { n:11, rank:"S", title:"Dance!",             feat:"Neil Kaplan",    char:"Madara",    dur:"2:01", yt:"8fqY7Nn_80g" },
+    { n:12, rank:"A", title:"MC",                 feat:null,             char:null,        dur:"2:38", yt:"O5cNfvULzYE" },
+    { n:13, rank:"A", title:"Maybe Next Time",    feat:null,             char:null,        dur:"2:24", yt:"R3_cSlEAn_s" }
+  ];
+
+  const RELEASES = [
+    { vol:1,  title:"When Things Feel Grim", year:2025, type:"album",  standout:"Azaleas", tracks:23, cover:"assets/covers/when-things-feel-grim.jpg", url:"https://music.apple.com/us/album/when-things-feel-grim/1825606756", band:"#3A4A5C" },
+    { vol:2,  title:"Dude, Where's My Slab?", year:2025, type:"album",  cover:"assets/covers/dude-wheres-my-slab.jpg", url:"https://music.apple.com/us/album/dude-wheres-my-slab/1814301430", band:"#6B3FA0" },
+    { vol:3,  title:"Antitoxin", year:2024, type:"single", feat:"CloudStyle", cover:"assets/covers/antitoxin.jpg", url:"https://music.apple.com/us/album/antitoxin-feat-cloudstyle-single/1750373419", band:"#2F6B4F" },
+    { vol:4,  title:"Pajama Sam", year:2024, type:"single", cover:"assets/covers/pajama-sam.jpg", url:"https://music.apple.com/us/album/pajama-sam-single/1743602122", band:"#E8A838" },
+    { vol:5,  title:"A Reason Not 2 KMS", year:2023, type:"album", cover:"assets/covers/a-reason-not-2-kms.jpg", url:"https://music.apple.com/us/album/a-reason-not-2-kms/1681053905", band:"#1A1A22" },
+    { vol:6,  title:"Benavyle", year:2023, type:"EP", cover:"assets/covers/benavyle-ep.jpg", url:"https://music.apple.com/us/album/benavyle-ep/1660409505", band:"#C45A2A" },
+    { vol:7,  title:"Fire Style!", year:2022, type:"album", cover:"assets/covers/fire-style.jpg", url:"https://music.apple.com/us/album/fire-style/1637000554", band:"#D9361E" },
+    { vol:8,  title:"Sasuke", year:2022, type:"EP", cover:"assets/covers/sasuke-ep.jpg", url:"https://music.apple.com/us/album/sasuke-ep/1660413572", band:"#4A2A6B" },
+    { vol:9,  title:"Like It Never Happened", year:2021, type:"album", cover:"assets/covers/like-it-never-happened.jpg", url:"https://music.apple.com/us/album/like-it-never-happened/1588109500", band:"#8B5A3C" },
+    { vol:10, title:"Yotsugi Ononoki", year:2020, type:"single", cover:"assets/covers/yotsugi-ononoki.jpg", url:"https://music.apple.com/us/album/yotsugi-ononoki-single/1539036021", band:"#C78BB8" },
+    { vol:11, title:"Weirdo", year:2018, type:"single", cover:"assets/covers/weirdo.jpg", url:"https://music.apple.com/us/album/weirdo-single/1439580461", band:"#D4722A" },
+    { vol:12, title:"Shallow", year:2018, type:"single", cover:"assets/covers/shallow.jpg", url:"https://music.apple.com/us/album/shallow-single/1438629050", band:"#4A6B8C" }
+  ];
+
+  const BLACK = [
+    { title:"When Things Feel Grim", cover:"assets/covers/when-things-feel-grim.jpg", url:"https://music.apple.com/us/album/when-things-feel-grim/1825606756" },
+    { title:"A Reason Not 2 KMS", cover:"assets/covers/a-reason-not-2-kms.jpg", url:"https://music.apple.com/us/album/a-reason-not-2-kms/1681053905" },
+    { title:"Dude, Where's My Slab?", cover:"assets/covers/dude-wheres-my-slab.jpg", url:"https://music.apple.com/us/album/dude-wheres-my-slab/1814301430" }
+  ];
+
+  const MERCH = [
+    { name:"Big Lugg Logo Tee",  price:"$—", img:"", url:"https://my-store-cfad3e.creator-spring.com/listing/big-lugg-logo-merch" },
+    { name:"Fire Style! Tee",    price:"$—", img:"", url:"" },
+    { name:"Hoodie",             price:"$—", img:"", url:"" },
+    { name:"Sticker Pack",       price:"$—", img:"", url:"" }
+  ];
+
+  const SHOWS = [];
+
+  const SPOTIFY_ARTIST = "https://open.spotify.com/artist/2SZnSKMNNj62KqgT8NrS6E";
+  const SEAL_ORDER = ["Snake", "Ram", "Monkey", "Boar", "Horse", "Tiger"];
+  const UCHIHA_YT = "Z0h8PZgbO6I";
+
+  const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ========== HERO LOAD ========== */
+  function initHero() {
+    const panel = document.getElementById("hero-panel");
+    const portrait = document.getElementById("hero-portrait");
+    const sfx = document.getElementById("hero-sfx");
+    if (reduced) {
+      if (portrait) portrait.classList.add("is-in");
+      if (sfx) { sfx.style.opacity = "1"; sfx.style.transform = "rotate(-10deg)"; }
+      return;
+    }
+    requestAnimationFrame(function () {
+      if (panel) panel.classList.add("is-drawn");
+      setTimeout(function () {
+        if (portrait) portrait.classList.add("is-in");
+      }, 350);
+      setTimeout(function () {
+        if (sfx) sfx.classList.add("is-stamped");
+      }, 650);
+    });
+  }
+
+  /* ========== BUTTON PRESS ========== */
+  function initButtons() {
+    document.querySelectorAll(".btn").forEach(function (btn) {
+      btn.addEventListener("pointerdown", function () { btn.classList.add("is-pressed"); });
+      btn.addEventListener("pointerup", function () { btn.classList.remove("is-pressed"); });
+      btn.addEventListener("pointerleave", function () { btn.classList.remove("is-pressed"); });
+    });
+  }
+
+  /* ========== MISSION BOARD ========== */
+  function featLine(t) {
+    if (!t.feat) return "";
+    if (t.char) return "feat. " + t.feat + " (" + t.char + ")";
+    return "feat. " + t.feat;
+  }
+
+  function renderMissions() {
+    const list = document.getElementById("mission-list");
+    if (!list) return;
+    list.innerHTML = TRACKS.map(function (t) {
+      var feat = featLine(t);
+      return (
+        '<li class="mission" data-n="' + t.n + '">' +
+          '<button type="button" class="mission__row" aria-expanded="false">' +
+            '<span class="mission__n">' + String(t.n).padStart(2, "0") + '</span>' +
+            '<span class="mission__rank" data-rank="' + t.rank + '">' + t.rank + '</span>' +
+            '<span class="mission__title">' + t.title +
+              (feat ? '<span class="mission__feat">' + feat + '</span>' : '') +
+            '</span>' +
+            '<span class="mission__dur">' + t.dur + '</span>' +
+          '</button>' +
+          '<div class="mission__panel" hidden></div>' +
+        '</li>'
+      );
+    }).join("");
+
+    list.addEventListener("click", function (e) {
+      var row = e.target.closest(".mission__row");
+      if (!row) return;
+      var li = row.closest(".mission");
+      var wasOpen = li.classList.contains("is-open");
+      list.querySelectorAll(".mission.is-open").forEach(function (m) {
+        m.classList.remove("is-open");
+        m.querySelector(".mission__row").setAttribute("aria-expanded", "false");
+        var p = m.querySelector(".mission__panel");
+        p.hidden = true;
+        p.innerHTML = "";
+      });
+      if (wasOpen) return;
+      li.classList.add("is-open");
+      row.setAttribute("aria-expanded", "true");
+      var n = parseInt(li.getAttribute("data-n"), 10);
+      var t = TRACKS.find(function (x) { return x.n === n; });
+      var panel = li.querySelector(".mission__panel");
+      panel.hidden = false;
+      if (t.yt) {
+        panel.innerHTML =
+          '<div class="mission__embed">' +
+          '<iframe src="https://www.youtube.com/embed/' + t.yt + '" title="' + t.title + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>' +
+          '</div>';
+      } else {
+        panel.innerHTML =
+          '<a class="btn" href="' + SPOTIFY_ARTIST + '" target="_blank" rel="noopener noreferrer">Listen on Spotify</a>';
+      }
+    });
+  }
+
+  /* ========== SHELF ========== */
+  function renderShelf() {
+    var shelf = document.getElementById("shelf");
+    if (!shelf) return;
+    shelf.innerHTML = RELEASES.map(function (r, i) {
+      var meta = r.year + (r.type ? " · " + r.type : "");
+      if (r.feat) meta += " · feat. " + r.feat;
+      if (r.standout) meta += " · " + r.standout;
+      return (
+        '<div class="spine-wrap" role="listitem" data-i="' + i + '">' +
+          '<button type="button" class="spine" aria-expanded="false" aria-label="' + r.title + '">' +
+            '<span class="spine__vol">第' + r.vol + '巻</span>' +
+            '<span class="spine__band" style="background:' + r.band + '"></span>' +
+            '<span class="spine__title">' + r.title + '</span>' +
+            '<span class="spine__year">' + r.year + '</span>' +
+          '</button>' +
+          '<div class="pullout">' +
+            '<img src="' + r.cover + '" alt="" width="140" height="140" loading="lazy" />' +
+            '<p class="pullout__name">' + r.title + '</p>' +
+            '<p class="pullout__meta">' + meta + '</p>' +
+            '<a class="btn btn--candy" href="' + r.url + '" target="_blank" rel="noopener noreferrer">Listen</a>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join("");
+
+    shelf.addEventListener("click", function (e) {
+      var btn = e.target.closest(".spine");
+      if (!btn) return;
+      var wrap = btn.closest(".spine-wrap");
+      var open = wrap.classList.contains("is-open");
+      shelf.querySelectorAll(".spine-wrap.is-open").forEach(function (w) {
+        w.classList.remove("is-open");
+        w.querySelector(".spine").setAttribute("aria-expanded", "false");
+      });
+      if (!open) {
+        wrap.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    if (window.matchMedia("(hover: hover)").matches) {
+      shelf.querySelectorAll(".spine-wrap").forEach(function (wrap) {
+        wrap.addEventListener("mouseenter", function () {
+          shelf.querySelectorAll(".spine-wrap.is-open").forEach(function (w) {
+            if (w !== wrap) {
+              w.classList.remove("is-open");
+              w.querySelector(".spine").setAttribute("aria-expanded", "false");
+            }
+          });
+          wrap.classList.add("is-open");
+          wrap.querySelector(".spine").setAttribute("aria-expanded", "true");
+        });
+        wrap.addEventListener("mouseleave", function () {
+          wrap.classList.remove("is-open");
+          wrap.querySelector(".spine").setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  }
+
+  /* ========== BLACK + MERCH + SHOWS ========== */
+  function renderBlack() {
+    var grid = document.getElementById("black-grid");
+    if (!grid) return;
+    grid.innerHTML = BLACK.map(function (b) {
+      return (
+        '<article class="black__panel">' +
+          '<img src="' + b.cover + '" alt="' + b.title + '" width="400" height="400" loading="lazy" />' +
+          '<h3>' + b.title + '</h3>' +
+          '<a href="' + b.url + '" target="_blank" rel="noopener noreferrer">Listen →</a>' +
+        '</article>'
+      );
+    }).join("");
+  }
+
+  function renderMerch() {
+    var grid = document.getElementById("merch-grid");
+    if (!grid) return;
+    grid.innerHTML = MERCH.map(function (m) {
+      var soon = !m.url;
+      var img = m.img
+        ? '<img src="' + m.img + '" alt="" loading="lazy" />'
+        : (soon ? "—" : "Logo");
+      return (
+        '<article class="merch-card' + (soon ? " is-soon tone" : "") + '">' +
+          '<div class="merch-card__img">' + img + '</div>' +
+          '<h3 class="merch-card__name">' + m.name + '</h3>' +
+          '<span class="merch-card__tag">' + m.price + '</span>' +
+          (soon
+            ? '<span class="merch-card__soon">Coming soon</span><button class="btn" type="button" disabled>Buy</button>'
+            : '<a class="btn btn--candy" href="' + m.url + '" target="_blank" rel="noopener noreferrer">Buy</a>') +
+        '</article>'
+      );
+    }).join("");
+  }
+
+  function renderShows() {
+    var block = document.getElementById("shows-block");
+    if (!block) return;
+    if (!SHOWS || !SHOWS.length) {
+      block.hidden = true;
+      block.innerHTML = "";
+      return;
+    }
+    block.hidden = false;
+    block.innerHTML = "<h3 class=\"section-label\" style=\"font-size:1.2rem\">Shows</h3><ul>" +
+      SHOWS.map(function (s) {
+        return "<li>" + (s.date || "") + " — " + (s.city || "") + (s.venue ? " · " + s.venue : "") + "</li>";
+      }).join("") + "</ul>";
+  }
+
+  /* ========== NAV IO ========== */
+  function initNav() {
+    var links = document.querySelectorAll(".nav-links a[data-nav]");
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute("data-nav")] = a; });
+    var sections = document.querySelectorAll("[data-watch]");
+    if (!("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = en.target.getAttribute("data-watch");
+        links.forEach(function (a) { a.classList.remove("is-active"); });
+        if (map[id]) map[id].classList.add("is-active");
+      });
+    }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+
+  /* ========== PANEL WIPE ========== */
+  function initWipes() {
+    var els = document.querySelectorAll(".wipe-in");
+    if (reduced) {
+      els.forEach(function (el) { el.classList.add("is-shown"); });
+      return;
+    }
+    if (!("IntersectionObserver" in window)) {
+      els.forEach(function (el) { el.classList.add("is-shown"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("is-shown");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ========== EASTER EGG ========== */
+  function initEasterEgg() {
+    var fireball = document.getElementById("fireball");
+    var sealsEl = document.getElementById("seals");
+    var typed = "";
+    var progress = [];
+
+    function shuffle(arr) {
+      var a = arr.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    if (sealsEl) {
+      var shuffled = shuffle(SEAL_ORDER);
+      shuffled.forEach(function (name) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "seal-btn";
+        b.textContent = name;
+        b.setAttribute("aria-label", "Seal: " + name);
+        b.addEventListener("click", function () {
+          progress.push(name);
+          var ok = true;
+          for (var i = 0; i < progress.length; i++) {
+            if (progress[i] !== SEAL_ORDER[i]) { ok = false; break; }
+          }
+          if (!ok) { progress = []; return; }
+          if (progress.length === SEAL_ORDER.length) {
+            progress = [];
+            triggerFireball();
+          }
+        });
+        sealsEl.appendChild(b);
+      });
+    }
+
+    document.addEventListener("keydown", function (e) {
+      var tag = (e.target && e.target.tagName) || "";
+      if (tag === "INPUT" || tag === "TEXTAREA" || (e.target && e.target.isContentEditable)) return;
+      if (!e.key || e.key.length !== 1) return;
+      typed += e.key.toLowerCase();
+      if (typed.length > 8) typed = typed.slice(-8);
+      if (typed.indexOf("katon") !== -1) {
+        typed = "";
+        triggerFireball();
+      }
+    });
+
+    function triggerFireball() {
+      if (!fireball) return;
+      fireball.hidden = false;
+      fireball.classList.add("is-on");
+      fireball.classList.remove("is-wiping");
+      if (!reduced) {
+        void fireball.offsetWidth;
+        fireball.classList.add("is-wiping");
+      }
+    }
+
+    function dismiss() {
+      if (!fireball) return;
+      fireball.classList.remove("is-on", "is-wiping");
+      fireball.hidden = true;
+    }
+
+    if (fireball) {
+      fireball.addEventListener("click", function (e) {
+        if (e.target.closest("a")) return;
+        dismiss();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") dismiss();
+      });
+    }
+  }
+
+  /* ========== FORM ========== */
+  function initForm() {
+    var form = document.querySelector(".join__form");
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      /* endpoint not configured yet */
+    });
+  }
+
+  /* boot */
+  initHero();
+  initButtons();
+  renderMissions();
+  renderShelf();
+  renderBlack();
+  renderMerch();
+  renderShows();
+  initNav();
+  initWipes();
+  initEasterEgg();
+  initForm();
+})();
+  </script>
 </body>
 </html>

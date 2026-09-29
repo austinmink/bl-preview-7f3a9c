@@ -1,22 +1,16 @@
-# Big Lugg — Private Preview Mock
+# Big Lugg — Private Preview (Tankōbon)
 
-**Not a public launch.** Concept share for Austin → friend.
+**Not a public launch.** Concept share.
 
-Static artist site mock for Big Lugg (Clay Dietz). Album art from Apple/iTunes CDN (cached locally under `assets/covers/`). No anime character art.
+Static artist site for Big Lugg (Clay Dietz). Manga-volume design. Single `index.html` + `assets/covers/`.
 
 ## Local preview
 
 ```bash
-npx --yes serve .
-# or: python3 -m http.server 8080
+python3 -m http.server 8080
+# open http://localhost:8080
 ```
 
-## Stack
+## Public deploy target
 
-- Pure HTML / CSS / JS
-- Google Fonts (Bebas Neue + DM Sans)
-- GSAP 3 + ScrollTrigger (CDN)
-
-## Badge
-
-Corner badge: **Preview mock · not live**
+https://austinmink.github.io/bl-preview-7f3a9c/
