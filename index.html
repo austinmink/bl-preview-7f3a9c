@@ -231,13 +231,16 @@ button, input { font: inherit; }
   margin: 0 0 1.5rem;
 }
 
-/* Panel wipe entry — black bar sweep */
+/* Panel wipe entry — black bar sweep
+   Default VISIBLE (no hiding clip-path). Clip only runs when .is-shown
+   starts the keyframe animation, so IO cannot leave panels permanently blank. */
 .wipe-in {
-  clip-path: inset(0 100% 0 0);
+  position: relative;
   isolation: isolate;
+  /* visible by default — do NOT start at inset(0 100% 0 0) */
 }
 .wipe-in.is-shown {
-  animation: panelWipe 560ms steps(8) forwards;
+  animation: panelWipe 620ms steps(8) both;
 }
 .wipe-in.is-shown::after {
   content: "";
@@ -247,7 +250,7 @@ button, input { font: inherit; }
   z-index: 8;
   pointer-events: none;
   transform: translateX(0);
-  animation: wipeBar 560ms steps(8) forwards;
+  animation: wipeBar 620ms steps(8) forwards;
 }
 @keyframes panelWipe {
   from { clip-path: inset(0 100% 0 0); }
@@ -258,9 +261,22 @@ button, input { font: inherit; }
   100% { transform: translateX(105%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wipe-in { clip-path: none; }
-  .wipe-in.is-shown { animation: none; }
-  .wipe-in.is-shown::after { display: none; animation: none; }
+  .wipe-in,
+  .wipe-in.is-shown {
+    clip-path: none !important;
+    animation: none !important;
+  }
+  .wipe-in.is-shown::after { display: none; animation: none !important; }
+  /* Hero: ensure portrait/SFX visible when animations are disabled */
+  .hero__portrait-wrap,
+  .hero__portrait-wrap.is-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero__sfx,
+  .hero__sfx.is-stamped {
+    opacity: 1 !important;
+  }
 }
 
 /* ========== HERO ========== */
@@ -288,7 +304,7 @@ button, input { font: inherit; }
   padding: 28px 20px 0;
 }
 .hero__panel.is-drawn {
-  animation: borderDraw 620ms steps(7) both;
+  animation: borderDraw 780ms steps(8) both;
 }
 @keyframes borderDraw {
   from { clip-path: inset(0 0 100% 0); }
@@ -325,12 +341,12 @@ button, input { font: inherit; }
   overflow: hidden;
 }
 .hero__sfx.is-stamped {
-  animation: sfxStamp 420ms steps(5) forwards;
+  animation: sfxStamp 520ms steps(6) forwards;
 }
 @keyframes sfxStamp {
-  0% { opacity: 0; transform: rotate(-10deg) scale(1.85); }
-  45% { opacity: 1; transform: rotate(-12deg) scale(0.82); }
-  70% { opacity: 1; transform: rotate(-9deg) scale(1.12); }
+  0% { opacity: 0; transform: rotate(-10deg) scale(2.1); }
+  40% { opacity: 1; transform: rotate(-14deg) scale(0.78); }
+  65% { opacity: 1; transform: rotate(-8deg) scale(1.18); }
   100% { opacity: 1; transform: rotate(-10deg) scale(1); }
 }
 .hero__title {
@@ -373,11 +389,11 @@ button, input { font: inherit; }
   transform: translateY(28px);
 }
 .hero__portrait-wrap.is-in {
-  animation: portraitIn 520ms steps(6) forwards;
+  animation: portraitIn 640ms steps(7) forwards;
 }
 @keyframes portraitIn {
-  0% { opacity: 0; transform: translateY(48px) translateX(18px); }
-  70% { opacity: 1; transform: translateY(-4px) translateX(0); }
+  0% { opacity: 0; transform: translateY(64px) translateX(28px); }
+  65% { opacity: 1; transform: translateY(-8px) translateX(0); }
   100% { opacity: 1; transform: translateY(0) translateX(0); }
 }
 .hero__portrait {
@@ -1002,7 +1018,7 @@ button, input { font: inherit; }
   </style>
 </head>
 <body>
-  <div class="preview-stamp" aria-hidden="true">Preview · not live</div>
+  <div class="preview-stamp" aria-hidden="true">Preview · not live · v4</div>
 
   <header class="site-nav">
     <a class="nav-mark" href="#top">BIG LUGG</a>
@@ -1235,18 +1251,26 @@ button, input { font: inherit; }
     const portrait = document.getElementById("hero-portrait");
     const sfx = document.getElementById("hero-sfx");
     if (reduced) {
-      if (portrait) portrait.classList.add("is-in");
-      if (sfx) { sfx.style.opacity = "1"; sfx.style.transform = "rotate(-10deg)"; }
+      if (portrait) {
+        portrait.classList.add("is-in");
+        portrait.style.opacity = "1";
+        portrait.style.transform = "none";
+      }
+      if (sfx) {
+        sfx.classList.add("is-stamped");
+        sfx.style.opacity = "1";
+        sfx.style.transform = "rotate(-10deg)";
+      }
       return;
     }
     requestAnimationFrame(function () {
       if (panel) panel.classList.add("is-drawn");
       setTimeout(function () {
         if (portrait) portrait.classList.add("is-in");
-      }, 480);
+      }, 420);
       setTimeout(function () {
         if (sfx) sfx.classList.add("is-stamped");
-      }, 900);
+      }, 780);
     });
   }
 
@@ -1448,25 +1472,57 @@ button, input { font: inherit; }
   }
 
   /* ========== PANEL WIPE ========== */
+  function revealWipe(el) {
+    if (!el || el.classList.contains("is-shown")) return;
+    el.classList.add("is-shown");
+  }
+
+  function wipeInView(el) {
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+    var vw = window.innerWidth || document.documentElement.clientWidth || 0;
+    return r.bottom > 0 && r.right > 0 && r.top < vh && r.left < vw;
+  }
+
   function initWipes() {
     var els = document.querySelectorAll(".wipe-in");
+    if (!els.length) return;
     if (reduced) {
-      els.forEach(function (el) { el.classList.add("is-shown"); });
+      els.forEach(function (el) { revealWipe(el); });
       return;
     }
     if (!("IntersectionObserver" in window)) {
-      els.forEach(function (el) { el.classList.add("is-shown"); });
+      els.forEach(function (el) { revealWipe(el); });
       return;
     }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
-          en.target.classList.add("is-shown");
+          revealWipe(en.target);
           io.unobserve(en.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, {
+      /* threshold 0: clip-path no longer zeros visibility, but keep low threshold + margin */
+      threshold: [0, 0.01, 0.1],
+      rootMargin: "0px 0px -5% 0px"
+    });
     els.forEach(function (el) { io.observe(el); });
+
+    /* Force-show already-in-view panels on next frame (IO can miss initial paint) */
+    requestAnimationFrame(function () {
+      els.forEach(function (el) {
+        if (wipeInView(el)) {
+          revealWipe(el);
+          try { io.unobserve(el); } catch (e) {}
+        }
+      });
+    });
+
+    /* wipe fallback: never leave a panel blank if IO fails */
+    setTimeout(function () {
+      els.forEach(function (el) { revealWipe(el); });
+    }, 2000);
   }
 
   /* ========== EASTER EGG ========== */
